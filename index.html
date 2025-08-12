@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Module Buttons</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.module-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1em;
+}
+
+.module-buttons button {
+  padding: 8px 16px;
+  background-color: #f0ad4e;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.module-buttons button.active {
+  background-color: #5cb85c;
+}
+
+.module-buttons button.completed::after {
+  content: " ✔";
+}
+.module-buttons button.incomplete::after {
+  content: " ☑";
+}
+
+.module-content {
+  display: none;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fdfdfd;
+}
+</style>
+</head>
+<body>
+
+<div class="module-buttons">
+  <button class="incomplete" onclick="showModule(1)">Module 1</button>
+  <button class="incomplete" onclick="showModule(2)">Module 2</button>
+  <button class="incomplete" onclick="showModule(3)">Module 3</button>
+  <button class="incomplete" onclick="showModule(4)">Module 4</button>
+</div>
+
+<div id="module1" class="module-content">
+  <h3>Module 1 Items</h3>
+  <ul>
+    <li><a href="#">Item 1.1</a></li>
+    <li><a href="#">Item 1.2</a></li>
+  </ul>
+</div>
+
+<div id="module2" class="module-content">
+  <h3>Module 2 Items</h3>
+  <ul>
+    <li><a href="#">Item 2.1</a></li>
+    <li><a href="#">Item 2.2</a></li>
+  </ul>
+</div>
+
+<div id="module3" class="module-content">
+  <h3>Module 3 Items</h3>
+  <ul>
+    <li><a href="#">Item 3.1</a></li>
+    <li><a href="#">Item 3.2</a></li>
+  </ul>
+</div>
+
+<div id="module4" class="module-content">
+  <h3>Module 4 Items</h3>
+  <ul>
+    <li><a href="#">Item 4.1</a></li>
+    <li><a href="#">Item 4.2</a></li>
+  </ul>
+</div>
+
+<script>
+function showModule(n) {
+  // Hide all module content
+  document.querySelectorAll('.module-content').forEach(div => {
+    div.style.display = 'none';
+  });
+
+  // Remove active highlight from all buttons
+  document.querySelectorAll('.module-buttons button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // Show selected module
+  document.getElementById('module' + n).style.display = 'block';
+
+  // Highlight active button and mark completed
+  const activeBtn = document.querySelector('.module-buttons button:nth-child(' + n + ')');
+  activeBtn.classList.add('active');
+  activeBtn.classList.remove('incomplete');
+  activeBtn.classList.add('completed');
+}
+</script>
+
+</body>
+</html>
